@@ -1,0 +1,13 @@
+---
+- name: Install ntp
+  package:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - ntp
+
+- name: enable and start ntpd
+  service:
+    name: ntpd
+    state: started
+    enabled: yes

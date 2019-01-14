@@ -26,5 +26,3 @@ Ansible version at least 2.6
 
 ## License
 The MIT License (MIT)
-
-See the [LICENSE](LICENSE) file for details.
