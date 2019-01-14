@@ -10,7 +10,7 @@ None
 None
 
 ## Requirements
-Ansible version at least 2.0
+Ansible version at least 2.4
 
 ## Example
 ```yaml
