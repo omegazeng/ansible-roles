@@ -1,7 +1,7 @@
 # ntpd
 
 ## Introduce
-Install ntp, enable and start ntp.
+Install ntp, enable and start ntpd.
 
 ## Installation
 None
