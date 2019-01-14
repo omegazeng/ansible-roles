@@ -1,8 +1,10 @@
 ---
-- hostname:
+- name: Set hostname
+  hostname:
     name: "{{ hostname_prefix }}{{ inventory_hostname.replace('.', '-') }}"
 
-- template:
+- name: Set /etc/hosts
+  template:
     src: hosts
     dest: /etc/
     owner: root

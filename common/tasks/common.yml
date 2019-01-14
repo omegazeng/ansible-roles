@@ -1,5 +1,6 @@
 ---
-- package:
+- name: Install useful package on all platform
+  package:
     name: "{{ item }}"
     state: latest
   with_items:
@@ -7,7 +8,8 @@
     - net-tools
     - tree
 
-- package:
+- name: Install useful package on Debian
+  package:
     name: "{{ item }}"
     state: latest
   with_items:
@@ -15,7 +17,8 @@
   when:
     - ansible_os_family == "Debian"
 
-- package:
+- name: Install useful package on RedHat
+  package:
     name: "{{ item }}"
     state: latest
   with_items:
@@ -24,12 +27,14 @@
   when:
     - ansible_os_family == "RedHat"
 
-- selinux:
-    state: "{{ selinux }}"
+- name: Set selinux
+  selinux:
+    state: disabled
   when:
     - ansible_os_family == "RedHat"
 
-- timezone:
+- name: Set timezone
+  timezone:
     name: "{{ timezone }}"
 
 - name: Stop and disable firewalld
@@ -47,4 +52,3 @@
 - name: Disable swap
   command: swapoff -a
   when: ansible_swaptotal_mb > 0
-

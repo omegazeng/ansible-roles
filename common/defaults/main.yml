@@ -1,4 +1,2 @@
 ---
-selinux: "disabled"
 timezone: "Asia/Shanghai"
-firewalld: "disabled"

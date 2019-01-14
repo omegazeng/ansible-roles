@@ -1,6 +1,7 @@
 # sshd
 
-**Warning**: This role will set PasswordAuthentication to no.
+**Warning**: This role will set PasswordAuthentication to no by default.
+
 ## Introduce
 Use to configure sshd.
 
@@ -11,7 +12,7 @@ None
 None
 
 ## Requirements
-* Ansible version at least 2.0
+* Ansible version at least 2.6
 * Ubuntu 16 / CentOS 7
 
 ## Example
@@ -21,7 +22,7 @@ None
   become: yes
 
   roles:
-    - sshd
+    - { role: sshd, ssh_PasswordAuthentication: "yes" }
 ```
 
 ## License

@@ -3,6 +3,12 @@
 ## Introduce
 Initial Server Setup
 
+    install useful package
+    disable firewalld
+    disable selinux
+    set timezone
+    disable swap
+
 ## Installation
 None
 
@@ -10,7 +16,7 @@ None
 None
 
 ## Requirements
-Ansible version at least 2.4
+Ansible version at least 2.6
 
 ## Example
 ```yaml
@@ -24,5 +30,3 @@ Ansible version at least 2.4
 
 ## License
 The MIT License (MIT)
-
-See the [LICENSE](LICENSE) file for details.

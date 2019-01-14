@@ -1,13 +1,20 @@
 ---
-- set_fact:
+- name: set fact
+  set_fact:
     sshd_service_name: "sshd"
 
-- set_fact:
+- name: set fact
+  set_fact:
     sshd_service_name: "ssh"
   when:
     - ansible_distribution == "Ubuntu"
     - ansible_distribution_major_version in ["12", "14"]
 
 - name: Copy sshd config
-  template: src=sshd_config_{{ansible_distribution}}_{{ansible_distribution_major_version}} dest=/etc/ssh/sshd_config owner=root group=root mode=644
+  template:
+    src: "sshd_config_{{ansible_distribution}}_{{ansible_distribution_major_version}}"
+    dest: /etc/ssh/sshd_config
+    owner: root
+    group: root
+    mode: 644
   notify: Restart sshd
