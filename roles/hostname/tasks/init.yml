@@ -1,0 +1,11 @@
+---
+- hostname:
+    name: "{{ hostname_prefix }}{{ inventory_hostname.replace('.', '-') }}"
+
+- template:
+    src: hosts
+    dest: /etc/
+    owner: root
+    group: root
+    mode: '0644'
+

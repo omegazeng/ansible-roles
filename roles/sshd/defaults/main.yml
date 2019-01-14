@@ -1,0 +1,4 @@
+---
+sshd_Port: 22
+sshd_UseDNS: "no"
+sshd_PasswordAuthentication: "no"

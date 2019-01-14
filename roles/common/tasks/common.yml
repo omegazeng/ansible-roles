@@ -1,0 +1,50 @@
+---
+- package:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - vim
+    - net-tools
+    - tree
+
+- package:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - dnsutils
+  when:
+    - ansible_os_family == "Debian"
+
+- package:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - epel-release
+    - bind-utils
+  when:
+    - ansible_os_family == "RedHat"
+
+- selinux:
+    state: "{{ selinux }}"
+  when:
+    - ansible_os_family == "RedHat"
+
+- timezone:
+    name: "{{ timezone }}"
+
+- name: Stop and disable firewalld
+  service:
+    name: firewalld
+    enabled: no
+    state: stopped
+
+- name: Remove swapfile from /etc/fstab
+  mount:
+    name: swap
+    fstype: swap
+    state: absent
+
+- name: Disable swap
+  command: swapoff -a
+  when: ansible_swaptotal_mb > 0
+
