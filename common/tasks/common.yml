@@ -27,6 +27,14 @@
   when:
     - ansible_os_family == "RedHat"
 
+- name: Configure ulimit
+  template:
+    src: limits-99-common.conf
+    dest: /etc/security/limits.d/99-common.conf
+    owner: root
+    group: root
+    mode: 0644
+
 - name: Set selinux
   selinux:
     state: disabled

@@ -1,0 +1,54 @@
+---
+- name: Import apt key
+  apt_key:
+    url: "{{ docker_repo }}/linux/ubuntu/gpg"
+    state: present
+  when:
+    - ansible_distribution == "Ubuntu"
+    
+
+- name: Add apt repository
+  apt_repository:
+    repo: "deb [arch=amd64] {{ docker_repo }}/linux/ubuntu {{ ansible_distribution_release }} stable"
+    state: present
+    update_cache: yes
+  when:
+    - ansible_distribution == "Ubuntu"
+
+- name: Import rpm key
+  rpm_key:
+    key: "{{ docker_repo }}/linux/centos/gpg"
+    state: present
+  when:
+    - ansible_os_family == "RedHat"
+
+- name: Add yum repository
+  get_url:
+    url: "{{ docker_repo }}/linux/centos/docker-ce.repo"
+    dest: /etc/yum.repos.d/docker-ce.repo
+    force: yes
+    owner: root
+    group: root
+    mode: 0644
+  when:
+    - ansible_os_family == "RedHat"
+
+- name: Install package
+  package:
+    name: docker-ce
+    state: present
+
+- name: Enable and start docker
+  service:
+    name: docker
+    state: started
+    enabled: yes
+
+- name: Configure docker
+  template:
+    src: daemon.json
+    dest: /etc/docker/daemon.json
+    owner: root
+    group: root
+    mode: 0644
+  notify: Restart docker

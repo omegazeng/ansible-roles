@@ -1,3 +1,7 @@
 127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
 ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+
 127.0.0.1   {{ hostname_prefix }}{{ inventory_hostname.replace('.', '-') }}
+
+{% for host in play_hosts %}{{ host }}	{{ hostname_prefix }}{{ host.replace('.', '-') }}
+{% endfor %}

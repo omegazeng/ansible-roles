@@ -1,0 +1,3 @@
+---
+# docker_repo: https://download.docker.com
+docker_repo: https://mirrors.aliyun.com/docker-ce
