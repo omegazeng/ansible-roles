@@ -4,6 +4,7 @@
     name: "{{ item }}"
     state: latest
   with_items:
+    - bash-completion
     - vim
     - net-tools
     - tree

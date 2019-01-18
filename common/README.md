@@ -25,7 +25,8 @@ Ansible version at least 2.6
   become: yes
   
   roles:
-    - { role: common, timezone: "Asia/Shanghai" }
+    - role: common
+      timezone: "Asia/Shanghai"
 ```
 
 ## License

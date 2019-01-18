@@ -1,7 +1,7 @@
-# docker
+# kubernetes
 
 ## Introduce
-Use to install Docker CE.
+Use to install Kubernetes(kubelet, kubeadm, kubectl).
 
 ## Installation
 None
@@ -16,16 +16,12 @@ None
 
 ## Example
 ```yaml
-- name: Installing Docker CE
+- name: Installing Kubernetes
   hosts: test
   become: yes
-
+  
   roles:
-    - role: docker
-      docker_dns:
-        - 8.8.8.8
-        - 8.8.4.4
-        - 1.1.1.1
+    - kubernetes
 ```
 
 ## License

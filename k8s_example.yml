@@ -1,0 +1,35 @@
+---
+- name: k8s master
+  hosts: k8s_master
+  become: yes
+
+  roles:
+    - role: hostname # Warning: change hostname
+      hostname_prefix: "master-"
+
+- name: k8s worker
+  hosts: k8s_worker
+  become: yes
+
+  roles:
+    - role: hostname # Warning: change hostname
+      hostname_prefix: "worker-"
+
+- name: k8s
+  hosts: k8s
+  become: yes
+
+  roles:
+    - common  # Warning: disable filewalld
+    - sshd # Warning: disable PasswordAuthentication
+    - ntpd
+    - role: docker
+      docker_repo: "https://mirrors.aliyun.com/docker-ce"
+      docker_registry_mirror: "https://registry.docker-cn.com"
+      docker_dns:
+        - 223.5.5.5
+        - 223.6.6.6
+        - 114.114.114.114
+    - role: kubernetes
+      k8s_repo: "https://mirrors.aliyun.com/kubernetes"
+

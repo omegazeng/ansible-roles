@@ -1,0 +1,52 @@
+---
+- name: Import apt key
+  apt_key:
+    url: "{{ k8s_repo }}/apt/doc/apt-key.gpg"
+    state: present
+  when:
+    - ansible_distribution == "Ubuntu"
+
+- name: Add apt repository
+  apt_repository:
+    repo: "deb {{ k8s_repo }}/apt/ kubernetes-{{ ansible_distribution_release }} main"
+    state: present
+    update_cache: yes
+  when:
+    - ansible_distribution == "Ubuntu"
+
+- name: Add yum repository
+  template:
+    src: k8s.repo
+    dest: /etc/yum.repos.d/kubernetes.repo
+    force: yes
+    owner: root
+    group: root
+    mode: 0644
+  when:
+    - ansible_os_family == "RedHat"
+
+- name: Set kernel parameter
+  template:
+    src: k8s.conf
+    dest: /etc/sysctl.d/k8s.conf
+    force: yes
+    owner: root
+    group: root
+    mode: 0644
+  when:
+    - ansible_os_family == "RedHat"
+
+- name: Install package
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - kubelet
+    - kubeadm
+    - kubectl
+
+- name: Enable and start kubelet
+  service:
+    name: kubelet
+    state: started
+    enabled: yes
