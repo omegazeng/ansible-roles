@@ -20,8 +20,11 @@
   become: yes
 
   roles:
-    - common  # Warning: disable filewalld
-    - sshd # Warning: disable PasswordAuthentication
+    - role: common  # Warning: disable filewalld,selinux,swap
+      timezone: "Asia/Shanghai"
+    # - role: sshd
+    #   sshd_UseDNS: "no"
+    #   sshd_PasswordAuthentication: "no"
     - ntpd
     - role: docker
       docker_repo: "https://mirrors.aliyun.com/docker-ce"
@@ -32,4 +35,3 @@
         - 114.114.114.114
     - role: kubernetes
       k8s_repo: "https://mirrors.aliyun.com/kubernetes"
-

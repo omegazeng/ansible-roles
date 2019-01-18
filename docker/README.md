@@ -22,10 +22,12 @@ None
 
   roles:
     - role: docker
+      docker_repo: "https://mirrors.aliyun.com/docker-ce"
+      docker_registry_mirror: "https://registry.docker-cn.com"
       docker_dns:
-        - 8.8.8.8
-        - 8.8.4.4
-        - 1.1.1.1
+        - 223.5.5.5
+        - 223.6.6.6
+        - 114.114.114.114
 ```
 
 ## License

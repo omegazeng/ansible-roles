@@ -21,7 +21,8 @@ None
   become: yes
   
   roles:
-    - kubernetes
+    - role: kubernetes
+      k8s_repo: "https://mirrors.aliyun.com/kubernetes" # Default: "https://packages.cloud.google.com"
 ```
 
 ## License

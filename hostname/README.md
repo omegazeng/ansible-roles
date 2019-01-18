@@ -21,7 +21,8 @@ Ansible version at least 2.6
   become: yes
   
   roles:
-    - { role: hostname,  hostname_prefix: "test-" }
+    - role: hostname
+      hostname_prefix: "test-" # Default: "ip-"
 ```
 
 ## License

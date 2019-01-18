@@ -6,8 +6,8 @@ Initial Server Setup
     install useful package
     disable firewalld
     disable selinux
-    set timezone
     disable swap
+    set timezone
 
 ## Installation
 None
@@ -26,7 +26,7 @@ Ansible version at least 2.6
   
   roles:
     - role: common
-      timezone: "Asia/Shanghai"
+      timezone: "Asia/Shanghai" # Default: "UTC"
 ```
 
 ## License

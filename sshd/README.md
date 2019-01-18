@@ -1,7 +1,5 @@
 # sshd
 
-**Warning**: This role will set PasswordAuthentication to no by default.
-
 ## Introduce
 Use to configure sshd.
 
@@ -22,7 +20,9 @@ None
   become: yes
 
   roles:
-    - { role: sshd, ssh_PasswordAuthentication: "yes" }
+    - role: sshd
+      sshd_UseDNS: "no" # Default: "yes"
+      sshd_PasswordAuthentication: "no" # Default: "yes"
 ```
 
 ## License

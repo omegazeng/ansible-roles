@@ -1,6 +1,6 @@
 # ansible-roles
 
-## example
+## Example
 [k8s_example.yml](k8s_example.yml)
 
 
