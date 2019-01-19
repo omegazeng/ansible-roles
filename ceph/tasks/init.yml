@@ -1,0 +1,18 @@
+---
+- name: Add yum repository
+  template:
+    src: ceph.repo
+    dest: /etc/yum.repos.d/ceph.repo
+    force: yes
+    owner: root
+    group: root
+    mode: 0644
+  when:
+    - ansible_os_family == "RedHat"
+
+- name: Install package
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - ceph-common

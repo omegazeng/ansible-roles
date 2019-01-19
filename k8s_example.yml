@@ -26,6 +26,8 @@
     #   sshd_UseDNS: "no"
     #   sshd_PasswordAuthentication: "no"
     - ntpd
+    - role: ceph
+      ceph_repo: "https://mirrors.aliyun.com/ceph"
     - role: docker
       docker_repo: "https://mirrors.aliyun.com/docker-ce"
       docker_registry_mirror: "https://registry.docker-cn.com"

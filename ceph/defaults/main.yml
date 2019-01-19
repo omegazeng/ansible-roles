@@ -1,0 +1,5 @@
+---
+ceph_version: luminous
+
+ceph_repo: https://download.ceph.com
+# ceph_repo: https://mirrors.aliyun.com/ceph
