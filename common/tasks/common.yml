@@ -8,6 +8,8 @@
     - vim
     - net-tools
     - tree
+    - iotop
+    - sysstat
 
 - name: Install useful package on Debian
   package:
