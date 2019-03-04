@@ -1,18 +1,23 @@
 # ceph
 
 ## Introduce
+
 Install ceph-common
 
 ## Installation
+
 None
 
 ## Dependencies
+
 None
 
 ## Requirements
+
 Ansible version at least 2.6
 
 ## Example
+
 ```yaml
 - name: Install ceph-common
   hosts: test
@@ -24,4 +29,5 @@ Ansible version at least 2.6
 ```
 
 ## License
+
 The MIT License (MIT)

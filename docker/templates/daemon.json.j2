@@ -1,4 +1,8 @@
 {
   "registry-mirrors": [{% if docker_registry_mirror is defined and docker_registry_mirror|length %}"{{ docker_registry_mirror }}"{% endif %}],
-  "dns": [{% for dns in docker_dns %}"{{ dns }}"{% if not loop.last %},{% endif %}{% endfor %}]
+  "dns": [{% for dns in docker_dns %}"{{ dns }}"{% if not loop.last %},{% endif %}{% endfor %}],
+  "log-opts": {
+    "max-size": "{{ docker_log_max_size }}",
+    "max-file": "{{ docker_log_max_file }}"
+  }
 }

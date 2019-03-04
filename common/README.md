@@ -1,6 +1,7 @@
 # common
 
 ## Introduce
+
 Initial Server Setup
 
     install useful package
@@ -10,15 +11,19 @@ Initial Server Setup
     set timezone
 
 ## Installation
+
 None
 
 ## Dependencies
+
 None
 
 ## Requirements
+
 Ansible version at least 2.6
 
 ## Example
+
 ```yaml
 - name: Initial Server Setup
   hosts: test
@@ -30,4 +35,5 @@ Ansible version at least 2.6
 ```
 
 ## License
+
 The MIT License (MIT)
