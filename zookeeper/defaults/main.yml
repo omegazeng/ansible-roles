@@ -1,0 +1,14 @@
+---
+pkg: zookeeper
+version: 3.4.13
+pkg_name: "{{pkg}}-{{version}}"
+mirror_url: https://mirrors.tuna.tsinghua.edu.cn/
+base_url: "{{ mirror_url }}apache/{{ pkg }}/{{ pkg_name }}/"
+
+server_jvmflags: "-Xms2g -Xmx2g"
+zookeeper_port: 2181
+work_dir: "/data/{{ pkg }}/"
+
+user: "{{pkg}}"
+group: "{{pkg}}"
+path: "/usr/local/{{pkg}}"

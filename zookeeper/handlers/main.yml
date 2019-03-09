@@ -1,0 +1,6 @@
+---
+- name: Reload systemctl
+  command: /bin/systemctl daemon-reload
+
+- name: Restart zookeeper
+  service: name={{pkg}} state=restarted enabled=yes

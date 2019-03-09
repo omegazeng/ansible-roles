@@ -1,0 +1,77 @@
+---
+- name: Install openjdk 11 jre on Debian
+  package:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - openjdk-11-jre
+  when:
+    - ansible_os_family == "Debian"
+
+- name: Install openjdk 11 jre on RedHat
+  package:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - java-11-openjdk
+  when:
+    - ansible_os_family == "RedHat"
+
+- name: add user
+  user:
+    name: "{{ user }}"
+    shell: "/usr/sbin/nologin"
+    home: "{{ path }}"
+    createhome: no
+    system: yes
+
+- name: download package and unarchive
+  unarchive:
+    src: "{{ base_url }}{{ pkg_name }}.tar.gz"
+    dest: "/usr/local"
+    remote_src: True
+    creates: "/usr/local/{{ pkg_name }}"
+    owner: "{{ user }}"
+    group: "{{ group }}"
+
+- name: create zoo.cfg
+  template:
+    src: zoo.cfg
+    dest: "/usr/local/{{ pkg_name }}/conf/"
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: '0644'
+  notify: Restart zookeeper
+
+- name: create log4j.properties
+  template:
+     src: log4j.properties
+     dest: "/usr/local/{{ pkg_name }}/conf/"
+     owner: "{{ user }}"
+     group: "{{ group }}"
+     mode: '0644'
+  notify: Restart zookeeper
+
+- name: create symbolic link
+  file:
+    src: "/usr/local/{{ pkg_name }}"
+    dest: "/usr/local/{{ pkg }}"
+    state: link
+    force: yes
+
+- name: create systemd file
+  template:
+    src: "{{ pkg }}.service"
+    dest: /etc/systemd/system/
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Reload systemctl
+
+- name: create myid
+  template:
+    src: myid
+    dest: "{{ work_dir }}"
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: '0644'

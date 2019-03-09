@@ -1,0 +1,21 @@
+# systemd file at /etc/systemd/system/{{ pkg }}.service
+[Unit]
+Description={{pkg}} service
+Documentation=https://{{pkg}}.apache.org
+Requires=network.target remote-fs.target
+After=network.target remote-fs.target
+
+[Service]
+Type=forking
+User={{pkg}}
+Group={{pkg}}
+Environment="ZOO_LOG4J_PROP=INFO,ROLLINGFILE"
+Environment="SERVER_JVMFLAGS=-server {{ server_jvmflags }}"
+ExecStart={{ path }}/bin/zkServer.sh start
+ExecStop={{ path }}/bin/zkServer.sh stop
+Restart=on-failure
+RestartSec=3s
+WorkingDirectory={{ work_dir }}
+
+[Install]
+WantedBy=multi-user.target
