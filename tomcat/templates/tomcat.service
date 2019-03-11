@@ -1,0 +1,25 @@
+# systemd file at /etc/systemd/system/{{ pkg }}.service
+[Unit]
+Description={{pkg}} service
+Documentation=https://{{pkg}}.apache.org
+Requires=network.target remote-fs.target
+After=network.target remote-fs.target
+
+[Service]
+Type=forking
+User={{pkg}}
+Group={{pkg}}
+Environment=CATALINA_PID={{ path }}/{{pkg}}.pid
+Environment=CATALINA_HOME={{ path }}
+Environment=CATALINA_BASE={{ path }}
+Environment='CATALINA_OPTS={{ server_jvmflags }} -server -XX:+UseParallelGC'
+Environment='JAVA_OPTS=-Djava.security.egd=file:/dev/./urandom'
+ExecStart={{ path }}/bin/startup.sh
+ExecStop={{ path }}/bin/shutdown.sh
+Restart=on-failure
+RestartSec=3s
+WorkingDirectory={{ work_dir }}
+
+[Install]
+WantedBy=multi-user.target
+

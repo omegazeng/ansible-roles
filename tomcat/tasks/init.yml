@@ -24,28 +24,25 @@
     owner: "{{ user }}"
     group: "{{ group }}"
 
-- name: create zoo.cfg
-  template:
-    src: zoo.cfg
-    dest: "/usr/local/{{ pkg_name }}/conf/"
-    owner: "{{ user }}"
-    group: "{{ group }}"
-    mode: '0644'
-  notify: Restart zookeeper
-
-- name: create log4j.properties
-  template:
-     src: log4j.properties
-     dest: "/usr/local/{{ pkg_name }}/conf/"
-     owner: "{{ user }}"
-     group: "{{ group }}"
-     mode: '0644'
-  notify: Restart zookeeper
-
 - name: create symbolic link
   file:
     src: "/usr/local/{{ pkg_name }}"
     dest: "/usr/local/{{ pkg }}"
+    state: link
+    force: yes
+
+- name: create logs directory
+  file:
+    path: /data/{{ pkg }}/logs
+    state: directory
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: '0755'
+
+- name: create symbolic link for logs
+  file:
+    src: "/data/{{ pkg }}/logs"
+    dest: "/usr/local/{{ pkg_name }}/logs"
     state: link
     force: yes
 
@@ -57,11 +54,3 @@
     group: root
     mode: '0644'
   notify: Reload systemctl
-
-- name: create myid
-  template:
-    src: myid
-    dest: "{{ work_dir }}"
-    owner: "{{ user }}"
-    group: "{{ group }}"
-    mode: '0644'

@@ -10,6 +10,7 @@
     - tree
     - iotop
     - sysstat
+    - haveged
 
 - name: Install useful package on Debian
   package:
