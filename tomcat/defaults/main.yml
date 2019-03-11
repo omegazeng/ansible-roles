@@ -6,7 +6,7 @@ mirror_url: https://mirrors.tuna.tsinghua.edu.cn/
 base_url: "{{ mirror_url }}apache/{{ pkg }}/{{ pkg }}-9/v{{ version }}/bin/"
 
 server_jvmflags: "-Xms2g -Xmx2g"
-tomcat_port: 8080
+# tomcat_port: 8080
 work_dir: "/data/{{ pkg }}/"
 
 user: "{{pkg}}"

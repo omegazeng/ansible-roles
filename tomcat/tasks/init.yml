@@ -54,3 +54,9 @@
     group: root
     mode: '0644'
   notify: Reload systemctl
+
+- name: enable and start
+  service:
+    name: tomcat
+    state: started
+    enabled: yes
