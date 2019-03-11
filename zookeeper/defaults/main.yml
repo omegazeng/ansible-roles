@@ -5,7 +5,9 @@ pkg_name: "{{pkg}}-{{version}}"
 mirror_url: https://mirrors.tuna.tsinghua.edu.cn/
 base_url: "{{ mirror_url }}apache/{{ pkg }}/{{ pkg_name }}/"
 
-server_jvmflags: "-Xms2g -Xmx2g"
+memory_percent: 0.4
+memory_resource: "{{ (ansible_memtotal_mb * memory_percent) | round | int }}"
+server_jvmflags: "-Xms{{ memory_resource }}m -Xmx{{ memory_resource }}m"
 zookeeper_port: 2181
 work_dir: "/data/{{ pkg }}/"
 

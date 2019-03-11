@@ -56,7 +56,9 @@
     owner: root
     group: root
     mode: '0644'
-  notify: Reload systemctl
+  notify:
+    - Reload systemctl
+    - Reload zookeeper
 
 - name: create myid
   template:

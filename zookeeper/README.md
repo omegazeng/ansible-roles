@@ -28,7 +28,8 @@ None
   become: yes
 
   roles:
-    - zookeeper
+    - role: zookeeper
+      memory_percent: 0.4
 ```
 
 ## License
