@@ -1,0 +1,18 @@
+---
+pkg: kafka
+scala_version: 2.12
+version: 2.1.1
+pkg_name: "{{pkg}}_{{scala_version}}-{{version}}"
+mirror_url: http://mirrors.tuna.tsinghua.edu.cn/
+base_url: "{{ mirror_url }}apache/{{ pkg }}/{{ version }}/"
+
+user: "{{pkg}}"
+group: "{{pkg}}"
+path: "/usr/local/{{pkg}}"
+
+work_dir: "/data/{{ pkg }}/"
+
+kafka_port: 9092
+kafka_memory_percent: 40
+memory_resource: "{{ (ansible_memtotal_mb * kafka_memory_percent / 100) | round | int }}"
+kafka_heap_opts: "-Xms{{ memory_resource }}m -Xmx{{ memory_resource }}m"

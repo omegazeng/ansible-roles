@@ -1,0 +1,67 @@
+---
+- name: create data directory
+  file:
+    path: /data
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: add user
+  user:
+    name: "{{ user }}"
+    shell: "/usr/sbin/nologin"
+    home: "{{ path }}"
+    createhome: no
+    system: yes
+
+- name: download package and unarchive
+  unarchive:
+    src: "{{ base_url }}{{ pkg_name }}.tgz"
+    dest: "/usr/local"
+    remote_src: yes
+    creates: "/usr/local/{{ pkg_name }}"
+    owner: "{{ user }}"
+    group: "{{ group }}"
+
+- name: create symbolic link
+  file:
+    src: "/usr/local/{{ pkg_name }}"
+    dest: "/usr/local/{{ pkg }}"
+    state: link
+    force: yes
+
+- name: create logs directory
+  file:
+    path: "/data/{{ pkg }}/logs"
+    state: directory
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: '0755'
+
+- name: create symbolic link for logs
+  file:
+    src: "/data/{{ pkg }}/logs"
+    dest: "/usr/local/{{ pkg }}/logs"
+    state: link
+    force: yes
+
+- name: create server.properties
+  template:
+    src: server.properties
+    dest: /usr/local/{{ pkg }}/config/
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: '0644'
+  notify: Restart kafka
+
+- name: create systemd file
+  template:
+    src: "{{ pkg }}.service"
+    dest: /etc/systemd/system
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+    - Reload systemctl
+    - Restart kafka

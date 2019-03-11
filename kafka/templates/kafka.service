@@ -1,0 +1,20 @@
+# systemd file at /etc/systemd/system/{{ pkg }}.service
+[Unit]
+Description={{pkg}} service
+Documentation=https://{{pkg}}.apache.org
+Requires=network.target remote-fs.target
+After=network.target remote-fs.target zookeeper.service
+
+[Service]
+Type=simple
+User={{pkg}}
+Group={{pkg}}
+Environment='KAFKA_HEAP_OPTS={{ kafka_heap_opts }}'
+ExecStart={{ path }}/bin/kafka-server-start.sh {{ path }}/config/server.properties
+ExecStop={{ path }}/bin/kafka-server-stop.sh
+Restart=on-failure
+RestartSec=3s
+WorkingDirectory={{ work_dir }}
+
+[Install]
+WantedBy=multi-user.target
