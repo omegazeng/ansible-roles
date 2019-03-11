@@ -2,7 +2,7 @@
 - name: Install useful package on all platform
   package:
     name: "{{ item }}"
-    state: latest
+    state: present
   with_items:
     - bash-completion
     - vim
@@ -15,7 +15,7 @@
 - name: Install useful package on Debian
   package:
     name: "{{ item }}"
-    state: latest
+    state: present
   with_items:
     - dnsutils
   when:
@@ -24,7 +24,7 @@
 - name: Install useful package on RedHat
   package:
     name: "{{ item }}"
-    state: latest
+    state: present
   with_items:
     - epel-release
     - bind-utils
