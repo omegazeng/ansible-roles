@@ -5,7 +5,9 @@ pkg_name: "apache-{{pkg}}-{{version}}"
 mirror_url: https://mirrors.tuna.tsinghua.edu.cn/
 base_url: "{{ mirror_url }}apache/{{ pkg }}/{{ pkg }}-9/v{{ version }}/bin/"
 
-server_jvmflags: "-Xms2g -Xmx2g"
+memory_percent: 0.2
+memory_resource: {{ ansible_memtotal_mb * memory_percent | round | int }}
+server_jvmflags: "-Xms{{ memory_resource }}m -Xmx{{ memory_resource }}m"
 # tomcat_port: 8080
 work_dir: "/data/{{ pkg }}/"
 
