@@ -55,4 +55,4 @@
     mode: '0644'
   notify: 
     - Reload systemctl
-    - Reload tomcat
+    - Restart tomcat

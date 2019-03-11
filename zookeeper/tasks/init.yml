@@ -58,7 +58,7 @@
     mode: '0644'
   notify:
     - Reload systemctl
-    - Reload zookeeper
+    - Restart zookeeper
 
 - name: create myid
   template:
