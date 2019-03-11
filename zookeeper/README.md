@@ -29,7 +29,7 @@ None
 
   roles:
     - role: zookeeper
-      memory_percent: 0.4
+      zookeeper_memory_percent: 40
 ```
 
 ## License

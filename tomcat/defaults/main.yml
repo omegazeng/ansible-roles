@@ -5,10 +5,10 @@ pkg_name: "apache-{{pkg}}-{{version}}"
 mirror_url: https://mirrors.tuna.tsinghua.edu.cn/
 base_url: "{{ mirror_url }}apache/{{ pkg }}/{{ pkg }}-9/v{{ version }}/bin/"
 
-memory_percent: 0.4
-memory_resource: "{{ (ansible_memtotal_mb * memory_percent) | round | int }}"
+tomcat_memory_percent: 40
+memory_resource: "{{ (ansible_memtotal_mb * tomcat_memory_percent / 100) | round | int }}"
 server_jvmflags: "-Xms{{ memory_resource }}m -Xmx{{ memory_resource }}m"
-# tomcat_port: 8080
+tomcat_port: 8080
 work_dir: "/data/{{ pkg }}/"
 
 user: "{{pkg}}"

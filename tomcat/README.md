@@ -29,7 +29,7 @@ None
 
   roles:
     - role: tomcat
-      memory_percent: 0.4
+      tomcat_memory_percent: 40
 ```
 
 ## License
