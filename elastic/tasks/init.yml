@@ -1,0 +1,132 @@
+---
+- name: create data directory
+  file:
+    path: /data
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: Import apt key
+  apt_key:
+    url: "{{ mirror_url }}/GPG-KEY-elasticsearch"
+    state: present
+  when:
+    - ansible_distribution == "Ubuntu"
+
+- name: Add apt repository
+  apt_repository:
+    repo: "deb {{ mirror_url }}/packages/{{ version }}/apt stable main"
+    state: present
+    update_cache: yes
+  when:
+    - ansible_distribution == "Ubuntu"
+
+- name: Add yum repository
+  template:
+    src: elastic.repo
+    dest: /etc/yum.repos.d/elastic.repo
+    force: yes
+    owner: root
+    group: root
+    mode: 0644
+  when:
+    - ansible_os_family == "RedHat"
+
+- name: Install package
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - elasticsearch
+    - logstash
+    - kibana
+
+- name: create elasticsearch work directory
+  file:
+    path: "{{ es_work_dir }}{{ item }}"
+    state: directory
+    owner: elasticsearch
+    group: elasticsearch
+    mode: '0750'
+  with_items:
+    - ""
+    - data
+    - logs
+
+- name: create logstash work directory
+  file:
+    path: "{{ ls_work_dir }}{{ item }}"
+    state: directory
+    owner: logstash
+    group: logstash
+    mode: '0775'
+  with_items:
+    - ""
+    - data
+    - logs
+
+- name: create kibana work directory
+  file:
+    path: "{{ kbn_work_dir }}{{ item }}"
+    state: directory
+    owner: kibana
+    group: kibana
+    mode: '0775'
+  with_items:
+    - ""
+    - data
+
+- name: create elasticsearch.yml
+  template:
+    src: elasticsearch.yml
+    dest: /etc/elasticsearch/
+    owner: root
+    group: elasticsearch
+    mode: '0660'
+  notify: Restart elasticsearch
+
+- name: create elasticsearch
+  template:
+    src: elasticsearch
+    dest: /etc/default/
+    owner: root
+    group: elasticsearch
+    mode: '0660'
+  notify: Restart elasticsearch
+
+- name: create logstash
+  template:
+    src: logstash
+    dest: /etc/default/
+    owner: root
+    group: root
+    mode: '0600'
+  notify: Restart logstash
+
+- name: create logstash.yml
+  template:
+    src: logstash.yml
+    dest: /etc/logstash/
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Restart logstash
+
+- name: create beats.conf
+  template:
+    src: beats.conf
+    dest: /etc/logstash/conf.d/
+    owner: root
+    group: root
+    mode: '0644'
+  # auto reload!!!
+
+- name: create kibana.yml
+  template:
+    src: kibana.yml
+    dest: /etc/kibana/
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Restart kibana

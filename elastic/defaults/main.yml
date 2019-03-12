@@ -1,0 +1,19 @@
+---
+version: 6.x
+mirror_url: https://artifacts.elastic.co
+
+cluster_name: my-es-app
+
+es_work_dir: /data/elasticsearch/
+es_host: 0.0.0.0
+es_port: 9200
+es_java_opts: "-Xms8g -Xmx8g"
+
+ls_work_dir: /data/logstash/
+ls_java_opts: "-Xms2g -Xmx2g"
+ls_beats_host: 0.0.0.0
+ls_beats_port: 5044
+
+kbn_work_dir: /data/kibana/
+kbn_host: 0.0.0.0
+kbn_port: 5601
