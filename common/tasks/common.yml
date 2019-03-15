@@ -11,6 +11,7 @@
     - iotop
     - sysstat
     - haveged
+    - nc
 
 - name: Install useful package on Debian
   package:
