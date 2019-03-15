@@ -1,18 +1,18 @@
 ---
-- name: Install openjdk 11 jre on Debian
+- name: Install openjdk 8 jre on Debian
   package:
     name: "{{ item }}"
     state: present
   with_items:
-    - openjdk-11-jre
+    - openjdk-8-jre
   when:
     - ansible_os_family == "Debian"
 
-- name: Install openjdk 11 jre on RedHat
+- name: Install openjdk 8 jre on RedHat
   package:
     name: "{{ item }}"
     state: present
   with_items:
-    - java-11-openjdk
+    - java-1.8.0-openjdk
   when:
     - ansible_os_family == "RedHat"
