@@ -1,20 +1,25 @@
 # tomcat
 
 ## Introduce
+
 Use to install tomcat.
 
 ## Installation
+
 None
 
 ## Dependencies
-None
+
+openjdk
 
 ## Requirements
+
 * Ansible version at least 2.0
 * Ubuntu 16.04/18.04
 * CentOS 7
 
 ## Example
+
 ```ini
 [test]
 10.0.0.1
@@ -33,4 +38,5 @@ None
 ```
 
 ## License
+
 The MIT License (MIT)

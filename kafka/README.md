@@ -1,20 +1,25 @@
 # kafka
 
 ## Introduce
+
 Use to install Kafka, and set up a cluster.
 
 ## Installation
+
 None
 
 ## Dependencies
+
 zookeeper
 
 ## Requirements
+
 * Ansible version at least 2.0
 * Ubuntu 16.04/18.04
 * CentOS 7
 
 ## Example
+
 ```ini
 [test]
 10.0.0.1 node_id=1
@@ -34,4 +39,5 @@ zookeeper
 ```
 
 ## License
+
 The MIT License (MIT)
