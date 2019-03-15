@@ -1,0 +1,17 @@
+---
+- name: Elasticsearch & Logstash & Kibana
+  hosts: elk
+  become: yes
+
+  roles:
+    - role: hostname # Warning: change hostname
+      hostname_prefix: "elk-"
+    - role: common  # Warning: disable filewalld,selinux,swap
+      timezone: "Asia/Shanghai"
+    # - role: sshd
+    #   sshd_UseDNS: "no"
+    #   sshd_PasswordAuthentication: "no"
+    - ntpd
+    - role: elastic
+      es_memory_percent: 60
+      ls_memory_percent: 20

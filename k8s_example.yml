@@ -1,5 +1,5 @@
 ---
-- name: k8s master
+- name: k8s master set hostname
   hosts: k8s_master
   become: yes
 
@@ -7,7 +7,7 @@
     - role: hostname # Warning: change hostname
       hostname_prefix: "master-"
 
-- name: k8s worker
+- name: k8s worker set hostname
   hosts: k8s_worker
   become: yes
 
@@ -15,7 +15,7 @@
     - role: hostname # Warning: change hostname
       hostname_prefix: "worker-"
 
-- name: k8s
+- name: k8s init
   hosts: k8s
   become: yes
 
