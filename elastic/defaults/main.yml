@@ -7,12 +7,16 @@ cluster_name: my-es-app
 es_work_dir: /data/elasticsearch/
 es_host: 0.0.0.0
 es_port: 9200
-es_java_opts: "-Xms8g -Xmx8g"
+es_memory_percent: 60
+es_memory_resource: "{{ (ansible_memtotal_mb * es_memory_percent / 100) | round | int }}"
+es_java_opts: "-Xms{{ es_memory_resource }}m -Xmx{{ es_memory_resource }}m"
 
 ls_work_dir: /data/logstash/
-ls_java_opts: "-Xms2g -Xmx2g"
 ls_beats_host: 0.0.0.0
 ls_beats_port: 5044
+ls_memory_percent: 20
+ls_memory_resource: "{{ (ansible_memtotal_mb * ls_memory_percent / 100) | round | int }}"
+ls_java_opts: "-Xms{{ ls_memory_resource }}m -Xmx{{ ls_memory_resource }}m"
 
 kbn_work_dir: /data/kibana/
 kbn_host: 0.0.0.0

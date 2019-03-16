@@ -7,7 +7,6 @@
 
 # Elasticsearch Java path
 #JAVA_HOME=
-JAVA_HOME={{ java_home }}
 
 # Elasticsearch configuration directory
 ES_PATH_CONF=/etc/elasticsearch

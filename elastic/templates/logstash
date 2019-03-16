@@ -9,5 +9,4 @@ LS_NICE="19"
 SERVICE_NAME="logstash"
 SERVICE_DESCRIPTION="logstash"
 
-JAVA_HOME={{ java_home }}
 LS_JAVA_OPTS="{{ ls_java_opts }}"
