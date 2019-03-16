@@ -3,5 +3,5 @@
 
 127.0.0.1   {{ hostname_prefix }}{{ inventory_hostname.replace('.', '-') }}
 
-{% for host in play_hosts %}{{ host }}	{{ hostname_prefix }}{{ host.replace('.', '-') }}
+{% for host in play_hosts|sort %}{{ host }}	{{ hostname_prefix }}{{ host.replace('.', '-') }}
 {% endfor %}
