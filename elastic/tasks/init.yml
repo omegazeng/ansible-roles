@@ -86,27 +86,24 @@
     mode: '0660'
   notify: Restart elasticsearch
 
-- name: create elasticsearch on Debian
-  template:
-    src: elasticsearch
-    dest: /etc/default/
-    owner: root
-    group: elasticsearch
-    mode: '0660'
-  notify: Restart elasticsearch
-  when:
-    - ansible_os_family == "Debian"
+- name: set fact
+  set_fact:
+    env_dest: "/etc/default/"
 
-- name: create elasticsearch on RedHat
-  template:
-    src: elasticsearch
-    dest: /etc/sysconfig/
-    owner: root
-    group: elasticsearch
-    mode: '0660'
-  notify: Restart elasticsearch
+- name: set fact
+  set_fact:
+    env_dest: "/etc/sysconfig/"
   when:
     - ansible_os_family == "RedHat"
+
+- name: create elasticsearch
+  template:
+    src: elasticsearch
+    dest: "{{ env_dest }}"
+    owner: root
+    group: elasticsearch
+    mode: '0660'
+  notify: Restart elasticsearch
 
 - name: create logstash
   template:
