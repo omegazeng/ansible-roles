@@ -1,4 +1,11 @@
 ---
+- name: Install useful package
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - nc
+
 - name: create data directory
   file:
     path: /data
