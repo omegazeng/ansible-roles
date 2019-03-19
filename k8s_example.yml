@@ -14,6 +14,9 @@
   roles:
     - role: hostname # Warning: change hostname
       hostname_prefix: "worker-"
+    # - nfsclient
+    # - role: ceph
+    #   ceph_repo: "https://mirrors.aliyun.com/ceph"
 
 - name: k8s init
   hosts: k8s
@@ -26,8 +29,6 @@
     #   sshd_UseDNS: "no"
     #   sshd_PasswordAuthentication: "no"
     - ntpd
-    - role: ceph
-      ceph_repo: "https://mirrors.aliyun.com/ceph"
     - role: docker
       docker_repo: "https://mirrors.aliyun.com/docker-ce"
       docker_registry_mirror: "https://registry.docker-cn.com"

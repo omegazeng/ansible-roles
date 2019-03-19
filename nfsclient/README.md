@@ -1,8 +1,8 @@
-# openjdk
+# nfsclient
 
 ## Introduce
 
-Use to install openjdk.
+Use to install nfsclient.
 
 ## Installation
 
@@ -28,12 +28,12 @@ None
 ```
 
 ```yaml
-- name: Installing openjdk
+- name: Installing nfsclient
   hosts: test
   become: yes
 
   roles:
-    - openjdk
+    - nfsclient
 ```
 
 ## License
