@@ -1,5 +1,5 @@
 ---
-version: 7.x
+version: 6.x
 mirror_url: https://artifacts.elastic.co
 
 cluster_name: my-es-app

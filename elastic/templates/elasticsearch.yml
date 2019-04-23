@@ -73,6 +73,7 @@ http.port: {{ es_port }}
 #
 #discovery.zen.ping.unicast.hosts: ["host1", "host2"]
 discovery.zen.ping.unicast.hosts: [{% for host in play_hosts|sort %}"{{ host }}"{% if not loop.last %}, {% endif %}{% endfor %}]
+#cluster.initial_master_nodes: [{% for host in play_hosts|sort %}"{{ host }}"{% if not loop.last %}, {% endif %}{% endfor %}]
 #
 # Prevent the "split brain" by configuring the majority of nodes (total number of master-eligible nodes / 2 + 1):
 #
