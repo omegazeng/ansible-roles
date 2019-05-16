@@ -1,3 +1,7 @@
 ---
 timezone: "UTC"
 # timezone: "Asia/Shanghai"
+
+memlock: unlimited
+nofile: 131072
+nproc: 65535
