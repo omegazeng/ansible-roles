@@ -16,5 +16,5 @@ docker_dns:
 
 docker_log_max_size: -1
 docker_log_max_file: 1
-# docker_log_max_size: 1g
-# docker_log_max_file: 3
+# docker_log_max_size: 100m
+# docker_log_max_file: 10

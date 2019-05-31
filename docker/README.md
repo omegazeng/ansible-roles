@@ -33,8 +33,8 @@ None
         - 223.5.5.5
         - 223.6.6.6
         - 114.114.114.114
-      docker_log_max_size: 1g
-      docker_log_max_file: 3
+      docker_log_max_size: 100m
+      docker_log_max_file: 10
 ```
 
 ## License
