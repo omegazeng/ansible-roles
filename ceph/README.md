@@ -25,7 +25,7 @@ Ansible version at least 2.6
   
   roles:
     - role: ceph
-      ceph_repo: "https://mirrors.aliyun.com/ceph" # Default: "https://download.ceph.com"
+      ceph_repo: "https://mirrors.tuna.tsinghua.edu.cn/ceph" # Default: "https://download.ceph.com"
 ```
 
 ## License
