@@ -1,5 +1,6 @@
 ---
 docker_repo: https://download.docker.com
+# docker_repo: https://mirrors.tuna.tsinghua.edu.cn/docker-ce
 # docker_repo: https://mirrors.aliyun.com/docker-ce
 
 docker_registry_mirror: ""

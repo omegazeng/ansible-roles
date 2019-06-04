@@ -27,7 +27,7 @@ None
 
   roles:
     - role: docker
-      docker_repo: "https://mirrors.aliyun.com/docker-ce"
+      docker_repo: "https://mirrors.tuna.tsinghua.edu.cn/docker-ce"
       docker_registry_mirror: "https://registry.docker-cn.com"
       docker_dns:
         - 223.5.5.5
