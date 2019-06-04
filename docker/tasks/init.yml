@@ -15,11 +15,21 @@
   when:
     - ansible_distribution == "Ubuntu"
 
+# - name: Add yum repository
+#   get_url:
+#     url: "{{ docker_repo }}/linux/centos/docker-ce.repo"
+#     dest: /etc/yum.repos.d/docker-ce.repo
+#     force: yes
+#     owner: root
+#     group: root
+#     mode: 0644
+#   when:
+#     - ansible_os_family == "RedHat"
+
 - name: Add yum repository
-  get_url:
-    url: "{{ docker_repo }}/linux/centos/docker-ce.repo"
+  template:
+    src: docker-ce.repo
     dest: /etc/yum.repos.d/docker-ce.repo
-    force: yes
     owner: root
     group: root
     mode: 0644

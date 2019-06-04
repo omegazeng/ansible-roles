@@ -1,0 +1,6 @@
+[docker-ce-stable]
+name=Docker CE Stable - $basearch
+baseurl={{ docker_repo }}/linux/centos/7/$basearch/stable
+enabled=1
+gpgcheck=1
+gpgkey={{ docker_repo }}/linux/centos/gpg
