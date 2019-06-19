@@ -1,0 +1,9 @@
+---
+- name: Reload systemctl
+  command: /bin/systemctl daemon-reload
+  
+- name: Reload sysctl
+  command: /usr/sbin/sysctl --system
+
+- name: Restart systemd-modules-load
+  service: name=systemd-modules-load state=restarted enabled=yes

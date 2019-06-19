@@ -33,8 +33,27 @@
     owner: root
     group: root
     mode: 0644
+  notify: Reload sysctl
   when:
     - ansible_os_family == "RedHat"
+
+- name: Install ipvs kernel module
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - ipset
+    - ipvsadm
+
+- name: Load ipvs kernel module
+  template:
+    src: ipvs.conf
+    dest: /etc/modules-load.d/ipvs.conf
+    force: yes
+    owner: root
+    group: root
+    mode: 0644
+  notify: Restart systemd-modules-load
 
 - name: Install package
   package:
