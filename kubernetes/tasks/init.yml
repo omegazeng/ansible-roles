@@ -37,13 +37,16 @@
   when:
     - ansible_os_family == "RedHat"
 
-- name: Install ipvs kernel module
+- name: Install package
   package:
     name: "{{ item }}"
     state: present
   with_items:
     - ipset
     - ipvsadm
+    - kubelet
+    - kubeadm
+    - kubectl
 
 - name: Load ipvs kernel module
   template:
@@ -54,15 +57,6 @@
     group: root
     mode: 0644
   notify: Restart systemd-modules-load
-
-- name: Install package
-  package:
-    name: "{{ item }}"
-    state: present
-  with_items:
-    - kubelet
-    - kubeadm
-    - kubectl
 
 - name: Enable and start kubelet
   service:
