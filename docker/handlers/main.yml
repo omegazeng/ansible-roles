@@ -1,3 +1,6 @@
 ---
 - name: Restart docker
   service: name=docker state=restarted enabled=yes
+
+- name: Reload sysctl
+  command: /usr/sbin/sysctl --system
