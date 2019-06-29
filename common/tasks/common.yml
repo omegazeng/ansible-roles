@@ -63,3 +63,11 @@
 - name: Disable swap
   command: swapoff -a
   when: ansible_swaptotal_mb > 0
+
+- name: Command history add timestamp
+  template:
+    src: history.sh
+    dest: /etc/profile.d/history.sh
+    owner: root
+    group: root
+    mode: 0644
