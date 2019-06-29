@@ -6,13 +6,12 @@
   with_items:
     - ntp
 
-- name: disable and stop chronyd
-  service:
-    name: chronyd
-    state: stopped
-    enabled: no
-  when:
-    - ansible_os_family == "RedHat"
+- name: Uninstall
+  package:
+    name: "{{ item }}"
+    state: absent
+  with_items:
+    - chrony
 
 - name: enable and start ntpd
   service:
