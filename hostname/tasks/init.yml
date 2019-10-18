@@ -2,6 +2,8 @@
 - name: Set hostname
   hostname:
     name: "{{ hostname_prefix }}{{ inventory_hostname.replace('.', '-') }}"
+  when:
+    - ansible_os_family != "Windows"
 
 - name: Set /etc/hosts
   template:
@@ -10,4 +12,17 @@
     owner: root
     group: root
     mode: '0644'
+  when:
+    - ansible_os_family != "Windows"
+
+- name: Set hostname on Windows
+  win_hostname:
+    name: "{{ hostname_prefix }}{{ inventory_hostname.replace('.', '-') }}"
+  register: res
+  when:
+    - ansible_os_family == "Windows"
+
+- name: Reboot Windows if hostname changed
+  win_reboot:
+  when: res.reboot_required
 
