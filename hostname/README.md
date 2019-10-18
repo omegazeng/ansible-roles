@@ -4,7 +4,11 @@
 
 Use to set hostname, and generate /etc/hosts.
 
-**Warning**: This playbook will change hostname, and cover /etc/hosts.
+**Warning**:
+
+This playbook will change hostname, and cover /etc/hosts.
+
+Machine will reboot if ansible_os_family is Windows.
 
 ## Installation
 
