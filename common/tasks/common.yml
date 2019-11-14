@@ -61,7 +61,7 @@
     state: absent
 
 - name: Disable swap
-  command: swapoff -a
+  command: /sbin/swapoff -a
   when: ansible_swaptotal_mb > 0
 
 - name: Command history add timestamp

@@ -24,5 +24,7 @@
 
 - name: Reboot Windows if hostname changed
   win_reboot:
-  when: res.reboot_required
+  when:
+    - ansible_os_family == "Windows"
+    - res.reboot_required
 
