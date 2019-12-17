@@ -8,7 +8,7 @@
 - name: Set /etc/hosts
   template:
     src: hosts
-    dest: /etc/
+    dest: /etc/hosts
     owner: root
     group: root
     mode: '0644'
@@ -19,6 +19,13 @@
   win_hostname:
     name: "{{ hostname_prefix }}{{ inventory_hostname.replace('.', '-') }}"
   register: res
+  when:
+    - ansible_os_family == "Windows"
+
+- name: Set /etc/hosts on Windows
+  win_template:
+    src: hosts
+    dest: C:\Windows\System32\drivers\etc\hosts
   when:
     - ansible_os_family == "Windows"
 
