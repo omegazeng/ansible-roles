@@ -13,8 +13,18 @@
   with_items:
     - chrony
 
-- name: enable and start ntpd
+- name: enable and start ntpd on Ubuntu
   service:
     name: ntpd
     state: started
     enabled: yes
+  when:
+    - ansible_os_family == "RedHat"
+
+- name: enable and start ntpd on RHEL
+  service:
+    name: ntp
+    state: started
+    enabled: yes
+  when:
+    - ansible_distribution == "Ubuntu"
