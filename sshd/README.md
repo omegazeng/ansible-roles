@@ -26,7 +26,6 @@ None
 
   roles:
     - role: sshd
-      sshd_UseDNS: "no" # Default: "yes"
       sshd_PasswordAuthentication: "no" # Default: "yes"
 ```
 

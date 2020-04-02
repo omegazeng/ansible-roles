@@ -1,0 +1,12 @@
+Port {{ sshd_Port }}
+UseDNS {{ sshd_UseDNS }}
+PasswordAuthentication {{ sshd_PasswordAuthentication }}
+
+ChallengeResponseAuthentication no
+UsePAM yes
+X11Forwarding yes
+PrintMotd no
+AcceptEnv LANG LC_*
+Subsystem sftp  /usr/lib/openssh/sftp-server
+
+ClientAliveInterval 60
