@@ -4,7 +4,7 @@ docker_repo: https://download.docker.com
 # docker_repo: https://mirrors.aliyun.com/docker-ce
 
 docker_registry_mirror: ""
-# docker_registry_mirror: https://docker.mirrors.ustc.edu.cn
+# docker_registry_mirror: https://daocloud.io
 
 docker_dns:
   - 8.8.8.8
