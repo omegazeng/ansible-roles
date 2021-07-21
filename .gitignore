@@ -3,3 +3,6 @@
 
 # VS Code
 .vscode/
+
+# user - ssh public key
+user/files/*.pub

@@ -1,0 +1,15 @@
+---
+- group: name=sudo system=yes
+
+- template: src=sudo dest=/etc/sudoers.d/ owner=root group=root mode=440
+
+- user:
+    name: "{{ item.key }}"
+    shell: "{{ item.value }}"
+    groups: sudo
+  with_dict: "{{ user_dict }}"
+
+- authorized_key:
+    user: "{{ item.key }}"
+    key: "{{ lookup('file', item.key + '.pub') }}"
+  with_dict: "{{ user_dict }}"
