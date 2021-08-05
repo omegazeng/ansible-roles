@@ -1,4 +1,5 @@
 {
+  "exec-opts": ["native.cgroupdriver=systemd"],
   "registry-mirrors": [{% if docker_registry_mirror is defined and docker_registry_mirror|length %}"{{ docker_registry_mirror }}"{% endif %}],
   "dns": [{% for dns in docker_dns %}"{{ dns }}"{% if not loop.last %},{% endif %}{% endfor %}],
   "log-opts": {

@@ -28,7 +28,7 @@ None
   roles:
     - role: docker
       docker_repo: "https://mirrors.tuna.tsinghua.edu.cn/docker-ce"
-      docker_registry_mirror: "https://docker.mirrors.ustc.edu.cn"
+      docker_registry_mirror: "https://daocloud.io"
       docker_dns:
         - 223.5.5.5
         - 223.6.6.6
