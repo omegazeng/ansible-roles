@@ -55,6 +55,20 @@
   with_items:
     - docker-ce
     - docker-compose
+  when:
+    - ansible_os_family != "RedHat"
+
+- name: Install package
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - docker-ce
+    - docker-compose
+  vars:
+    ansible_python_interpreter: /usr/bin/python
+  when:
+    - ansible_os_family == "RedHat"
 
 - name: Enable and start docker
   service:
