@@ -47,6 +47,9 @@
   notify: Reload sysctl
   when:
     - ansible_os_family == "RedHat"
+    
+- name: Flush handlers
+  meta: flush_handlers
 
 - name: Install package
   package:
