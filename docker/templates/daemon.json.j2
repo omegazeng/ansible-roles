@@ -1,7 +1,9 @@
 {
   "exec-opts": ["native.cgroupdriver=systemd"],
   "registry-mirrors": [{% if docker_registry_mirror is defined and docker_registry_mirror|length %}"{{ docker_registry_mirror }}"{% endif %}],
+  {% if docker_dns is defined and docker_dns|length -%}
   "dns": [{% for dns in docker_dns %}"{{ dns }}"{% if not loop.last %},{% endif %}{% endfor %}],
+  {% endif -%}
   "log-opts": {
     "max-size": "{{ docker_log_max_size }}",
     "max-file": "{{ docker_log_max_file }}"

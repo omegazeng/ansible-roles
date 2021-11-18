@@ -28,11 +28,7 @@ None
   roles:
     - role: docker
       docker_repo: "https://mirrors.tuna.tsinghua.edu.cn/docker-ce"
-      docker_registry_mirror: "https://daocloud.io"
-      docker_dns:
-        - 223.5.5.5
-        - 223.6.6.6
-        - 114.114.114.114
+      docker_registry_mirror: " https://f1361db2.m.daocloud.io"
       docker_log_max_size: 100m
       docker_log_max_file: 10
 ```
