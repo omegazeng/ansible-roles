@@ -5,11 +5,16 @@
     state: present
   when:
     - ansible_distribution == "Ubuntu"
-    
+
+- name: Get DEB architecture
+  shell: dpkg --print-architecture
+  register: deb_architecture
+  when:
+    - ansible_distribution == "Ubuntu"
 
 - name: Add apt repository
   apt_repository:
-    repo: "deb [arch=amd64] {{ docker_repo }}/linux/ubuntu {{ ansible_distribution_release }} stable"
+    repo: "deb [arch={{ deb_architecture.stdout }}] {{ docker_repo }}/linux/ubuntu {{ ansible_distribution_release }} stable"
     state: present
     update_cache: yes
   when:
@@ -47,7 +52,7 @@
   notify: Reload sysctl
   when:
     - ansible_os_family == "RedHat"
-    
+
 - name: Flush handlers
   meta: flush_handlers
 
