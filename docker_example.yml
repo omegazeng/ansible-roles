@@ -1,0 +1,9 @@
+---
+- name: install docker-ce
+  hosts: localhost
+  become: yes
+
+  roles:
+    - role: docker
+      docker_log_max_size: 100m
+      docker_log_max_file: 10
