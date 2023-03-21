@@ -3,5 +3,5 @@
 
 127.0.0.1   {{ hostname_prefix }}{{ ansible_default_ipv4.address.replace('.', '-') }}
 
-{% for host in play_hosts|sort %}{{ ansible_default_ipv4.address }}	{{ hostname_prefix }}{{ ansible_default_ipv4.address.replace('.', '-') }}
+{% for host in play_hosts|sort %}{{ hostvars[host]['ansible_default_ipv4']['address'] }}	{{ hostname_prefix }}{{ hostvars[host]['ansible_default_ipv4']['address'].replace('.', '-') }}
 {% endfor %}
