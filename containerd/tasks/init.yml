@@ -1,0 +1,71 @@
+- name: Load br_netfilter kernel module
+  template:
+    src: br_netfilter.conf
+    dest: /etc/modules-load.d/br_netfilter.conf
+    force: yes
+    owner: root
+    group: root
+    mode: 0644
+  notify: Restart systemd-modules-load
+
+- name: Set ip forwarding on in /proc and in the sysctl file and reload if necessary
+  sysctl:
+    name: net.ipv4.ip_forward
+    value: "1"
+    sysctl_set: yes
+    state: present
+    reload: yes
+
+- name: Set fact arch
+  set_fact:
+    arch: "amd64"
+  when:
+    - ansible_architecture == "x86_64"
+
+- name: set fact arch
+  set_fact:
+    arch: "arm64"
+  when:
+    - ansible_architecture == "aarch64"
+
+- name: Download nerdctl-full
+  get_url:
+    url: "https://github.com/containerd/nerdctl/releases/download/v{{ nerdctl_version }}/nerdctl-full-{{ nerdctl_version }}-linux-{{ arch }}.tar.gz"
+    dest: /tmp/nerdctl-full-{{ nerdctl_version }}-linux-{{ arch }}.tar.gz
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Unarchive nerdctl-full
+  unarchive:
+    src: /tmp/nerdctl-full-{{ nerdctl_version }}-linux-{{ arch }}.tar.gz
+    remote_src: true
+    dest: "/usr/local"
+    owner: "root"
+    group: "root"
+  notify: Reload systemctl
+
+- name: Get defaults from containerd
+  command: containerd config default
+  register: containerd_config_default
+
+- name: Prepare containerd/config.toml from default config
+  copy:
+    dest: /tmp/containerd_config.toml
+    content: "{{ containerd_config_default.stdout }}"
+
+- name: Enable SystemdCgroup
+  # command: sed -i '/SystemdCgroup/ s#false#true#g' /tmp/containerd_config.toml
+  replace:
+    path: /tmp/containerd_config.toml
+    regexp: '(\s+)SystemdCgroup = false(\s+.*)?$'
+    replace: '\1SystemdCgroup = true\2'
+  when:
+    - containerd_systemd_cgroup
+
+- name: Copy config.toml to /etc/containerd
+  copy:
+    remote_src: true
+    src: /tmp/containerd_config.toml
+    dest: /etc/containerd/config.toml
+  notify: Restart containerd
