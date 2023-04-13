@@ -15,7 +15,7 @@ None
 ## Requirements
 
 * Ansible version at least 2.6
-* Ubuntu 16/18
+* Ubuntu 16/18/20
 * CentOS 7
 
 ## Example
